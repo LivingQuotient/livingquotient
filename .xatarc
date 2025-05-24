@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://LivingQuotient-s-workspace-7am94v.us-east-1.xata.sh/db/Living-Quotient",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

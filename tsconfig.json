@@ -11,8 +11,17 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./*"]
     }
   },
-  "include": ["src"]
+  "include": [
+    "app",
+    "pages",
+    "src",
+    "config",
+    "hooks",
+    "styles",
+    "types",
+    "content"
+  ]
 }

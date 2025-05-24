@@ -1,14 +1,22 @@
 {
   "name": "livingquotient",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "vercel-build": "next build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "next": "^13.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@xata.io/client": "^0.0.0-next.v93343b9646f57a1e5c51c35eccf0767c2bb80baa",
     "dotenv": "^16.5.0",
     "markdown-wasm": "^1.2.0"
@@ -16,6 +24,5 @@
   "devDependencies": {
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
-  },
-  "description": ""
+  }
 }

@@ -8,7 +8,6 @@ import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const Sheet = SheetPrimitive.Root
-
 const SheetTrigger = SheetPrimitive.Trigger
 
 const portalVariants = cva("fixed inset-0 z-50 flex", {
@@ -23,18 +22,20 @@ const portalVariants = cva("fixed inset-0 z-50 flex", {
   defaultVariants: { position: "right" },
 })
 
-interface SheetPortalProps
-  extends SheetPrimitive.DialogPortalProps,
-    VariantProps<typeof portalVariants> {}
+interface SheetPortalProps extends VariantProps<typeof portalVariants> {
+  children: React.ReactNode
+  className?:string
+}
 
 const SheetPortal = ({
   position,
   className,
   children,
-  ...props
 }: SheetPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props}>
-    <div className={portalVariants({ position })}>{children}</div>
+  <SheetPrimitive.Portal>
+    <div className={cn(portalVariants({ position }), className)}>
+      {children}
+    </div>
   </SheetPrimitive.Portal>
 )
 SheetPortal.displayName = SheetPrimitive.Portal.displayName
@@ -74,66 +75,18 @@ const sheetVariants = cva(
       },
     },
     compoundVariants: [
-      {
-        position: ["top", "bottom"],
-        size: "content",
-        class: "max-h-screen",
-      },
-      {
-        position: ["top", "bottom"],
-        size: "default",
-        class: "h-1/3",
-      },
-      {
-        position: ["top", "bottom"],
-        size: "sm",
-        class: "h-1/4",
-      },
-      {
-        position: ["top", "bottom"],
-        size: "lg",
-        class: "h-1/2",
-      },
-      {
-        position: ["top", "bottom"],
-        size: "xl",
-        class: "h-5/6",
-      },
-      {
-        position: ["top", "bottom"],
-        size: "full",
-        class: "h-screen",
-      },
-      {
-        position: ["right", "left"],
-        size: "content",
-        class: "max-w-screen",
-      },
-      {
-        position: ["right", "left"],
-        size: "default",
-        class: "w-1/3",
-      },
-      {
-        position: ["right", "left"],
-        size: "sm",
-        class: "w-1/4",
-      },
-      {
-        position: ["right", "left"],
-        size: "lg",
-        class: "w-1/2",
-      },
-      {
-        position: ["right", "left"],
-        size: "xl",
-        class: "w-5/6",
-      },
-      {
-        position: ["right", "left"],
-        size: "full",
-        class: "w-screen",
-      },
+      { position: ["top", "bottom"], size: "content", class: "max-h-screen" },
+      { position: ["top", "bottom"], size: "default", class: "h-1/3" },
+      { position: ["top", "bottom"], size: "sm", class: "h-1/4" },
+      { position: ["top", "bottom"], size: "lg", class: "h-1/2" },
+      { position: ["top", "bottom"], size: "xl", class: "h-5/6" },
+      { position: ["top", "bottom"], size: "full", class: "h-screen" },
+      { position: ["right", "left"], size: "content", class: "max-w-screen" },
+      { position: ["right", "left"], size: "default", class: "w-1/3" },
+      { position: ["right", "left"], size: "sm", class: "w-1/4" },
+      { position: ["right", "left"], size: "lg", class: "w-1/2" },
+      { position: ["right", "left"], size: "xl", class: "w-5/6" },
+      { position: ["right", "left"], size: "full", class: "w-screen" },
     ],
     defaultVariants: {
       position: "right",
@@ -171,13 +124,7 @@ const SheetHeader = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className
-    )}
-    {...props}
-  />
+  <div className={cn("flex flex-col space-y-2 text-center sm:text-left", className)} {...props} />
 )
 SheetHeader.displayName = "SheetHeader"
 

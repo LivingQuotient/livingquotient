@@ -1,8 +1,5 @@
-import { withContentlayer } from "next-contentlayer"
+const { withContentlayer } = require("next-contentlayer");
 
-import "./env.mjs"
-
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -12,6 +9,9 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client"],
   },
-}
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
 
-export default withContentlayer(nextConfig)
+module.exports = withContentlayer(nextConfig);

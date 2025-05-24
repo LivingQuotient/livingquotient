@@ -1,0 +1,19 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_d0os4gido80pli9qppj0",
+    "operations": [
+      {
+        "rename_table": {
+          "to": "cities",
+          "from": "top_50_cities"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_d0os4gido80pli9qppj0",
+  "parent": "mig_d0olrgqdo80pli9qpmqg",
+  "schema": "public",
+  "startedAt": "2025-05-24T12:57:38.892391Z"
+}

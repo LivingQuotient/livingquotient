@@ -9,7 +9,7 @@ import { DocsSearch } from "@/components/search";
 import { SiteFooter } from "@/components/site-footer";
 import { LQScoreCircle } from "@/components/LQScoreCircle";
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { SimpleProgress } from "@/components/ui/simple-progress";
 
 const xata = getXataClient();
 
@@ -80,11 +80,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
               <DocsSearch />
             </div>
             <nav className="flex space-x-4">
-              <Link
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
                 <Icons.gitHub className="h-7 w-7" />
                 <span className="sr-only">GitHub</span>
               </Link>
@@ -100,21 +96,17 @@ export default async function CityPage({ params }: { params: { slug: string } })
               <p className="text-xl text-muted-foreground">All about living in {city.name}</p>
             </div>
             <hr className="my-4" />
-            {/* Placeholder for cover image */}
             <div className="w-full bg-gray-200 rounded-lg mb-8 aspect-[16/9] flex items-center justify-center">
               <span className="text-gray-400">Cover image placeholder (16:9)</span>
             </div>
-            {/* Introduction Section */}
             <section id="introduction" className="mb-8">
               <h2 className="text-2xl font-semibold mb-2">Introduction to Living in {city.name}</h2>
               <p className="text-muted-foreground">
                 This is a placeholder introduction for living in {city.name}. Here you can describe what makes the city unique, what new residents should know, and any other relevant information about life in the city.
               </p>
             </section>
-            {/* LQ Score Section */}
             <section id="lq-score" className="mb-8">
               <div className="flex flex-col lg:flex-row gap-6 items-center">
-                {/* Animated Circular Progress Graph */}
                 <LQScoreCircle score={72} />
                 <div>
                   <h2 className="text-2xl font-semibold mb-2">Living Quotient (LQ) Score</h2>
@@ -124,11 +116,10 @@ export default async function CityPage({ params }: { params: { slug: string } })
                 </div>
               </div>
             </section>
-            {/* LQ Sub-score Preview Grid */}
-            <section className="mt-12">
+            <section className="mt-12 mb-16">
               <h2 className="text-2xl font-bold mb-4">Living Quotient Breakdown</h2>
               <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-                {subScores.map(score => (
+                {subScores.map((score) => (
                   <a
                     href={score.href}
                     key={score.title}
@@ -136,184 +127,87 @@ export default async function CityPage({ params }: { params: { slug: string } })
                     style={{ scrollBehavior: "smooth" }}
                   >
                     <Card className="h-full flex flex-col items-start p-4">
-                      <div className="text-2xl mb-2">{score.emoji}</div>
                       <div className="font-semibold">{score.title}</div>
                       <div className="text-sm text-muted-foreground mb-2">{score.label}</div>
-                      <Progress value={score.meterValue} className="w-full h-2 mt-auto" />
+                      <SimpleProgress value={score.meterValue} className="w-full" />
                     </Card>
                   </a>
                 ))}
               </div>
             </section>
-
-            {/* Detailed LQ Category Sections */}
-            <section id="affordability-accessibility" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">🏠 Affordability & Accessibility</h2>
-              <p className="text-muted-foreground mb-6">Affordability & Accessibility in this city encompasses the overall cost of living, housing affordability, and access to essential goods and services. This section will provide a comprehensive overview of how affordable and accessible life is for residents, including insights into rent, utilities, childcare, and tax burden. Data and analysis will be dynamically sourced from Xata to ensure up-to-date, actionable information for newcomers and locals alike.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="cost-of-living" className="text-xl font-semibold mb-2 scroll-mt-24">📉 Cost of Living</h3>
-                  <p className="text-muted-foreground">A summary of the cost of living in this city. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="housing-affordability" className="text-xl font-semibold mb-2 scroll-mt-24">🏡 Housing Affordability</h3>
-                  <p className="text-muted-foreground">A summary of housing affordability. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="rent-ratio" className="text-xl font-semibold mb-2 scroll-mt-24">🏘️ Rent-to-Income Ratio</h3>
-                  <p className="text-muted-foreground">A summary of rent-to-income ratio. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="utilities" className="text-xl font-semibold mb-2 scroll-mt-24">💡 Utilities & Basic Goods</h3>
-                  <p className="text-muted-foreground">A summary of utilities and basic goods. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="childcare-costs" className="text-xl font-semibold mb-2 scroll-mt-24">👶 Childcare Costs</h3>
-                  <p className="text-muted-foreground">A summary of childcare costs. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="tax-burden" className="text-xl font-semibold mb-2 scroll-mt-24">💰 Tax Burden</h3>
-                  <p className="text-muted-foreground">A summary of tax burden. (Placeholder text.)</p>
-                </div>
-              </div>
+            {/* BEGIN SUB-SCORE SECTIONS */}
+            <section id="affordability-accessibility" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">🏠 Affordability & Accessibility</h2>
+              <p className="text-muted-foreground mb-2">
+                Discover how affordable and accessible life is in this city. We cover housing costs, transportation options, and the general cost of living to help you understand what to expect.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>Average rent and home prices</li>
+                <li>Public transportation availability</li>
+                <li>Everyday expenses and affordability</li>
+              </ul>
             </section>
-
-            <section id="family-community" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">👨‍👩‍👧‍👦 Family & Community</h2>
-              <p className="text-muted-foreground mb-6">Family & Community explores the quality of life for families, the strength of local communities, and the availability of supportive services. Here, you'll find details on school quality, safety, walkability, and opportunities for community engagement. This overview will help you understand how welcoming and connected the city feels for people of all backgrounds.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="school-quality" className="text-xl font-semibold mb-2 scroll-mt-24">🏫 School Quality</h3>
-                  <p className="text-muted-foreground">A summary of school quality. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="family-friendly" className="text-xl font-semibold mb-2 scroll-mt-24">👨‍👩‍👧 Family Friendliness</h3>
-                  <p className="text-muted-foreground">A summary of family friendliness. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="safety" className="text-xl font-semibold mb-2 scroll-mt-24">🚓 Safety/Crime Rate</h3>
-                  <p className="text-muted-foreground">A summary of safety and crime rate. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="community" className="text-xl font-semibold mb-2 scroll-mt-24">🤝 Community Engagement</h3>
-                  <p className="text-muted-foreground">A summary of community engagement. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="walkability" className="text-xl font-semibold mb-2 scroll-mt-24">🚶 Walkability</h3>
-                  <p className="text-muted-foreground">A summary of walkability. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="public-services" className="text-xl font-semibold mb-2 scroll-mt-24">🏛️ Public Services Access</h3>
-                  <p className="text-muted-foreground">A summary of public services access. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="spirituality" className="text-xl font-semibold mb-2 scroll-mt-24">⛪ Spiritual Access</h3>
-                  <p className="text-muted-foreground">A summary of spiritual access. (Placeholder text.)</p>
-                </div>
-              </div>
+            <section id="family-community" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">👨‍👩‍👧‍👦 Family & Community</h2>
+              <p className="text-muted-foreground mb-2">
+                Explore what makes this city great for families and building community. We highlight schools, parks, and opportunities for social connection.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>Quality of schools and childcare</li>
+                <li>Community events and organizations</li>
+                <li>Family-friendly amenities</li>
+              </ul>
             </section>
-
-            <section id="work-flexibility" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">💻 Work & Flexibility</h2>
-              <p className="text-muted-foreground mb-6">Work & Flexibility covers the city's readiness for remote work, job market resilience, and the daily realities of commuting. This section will highlight internet speed, remote work infrastructure, and employment opportunities, as well as how easy it is to get to work or work from home. Future updates will draw on real data to help you assess your career and lifestyle options here.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="internet-speed" className="text-xl font-semibold mb-2 scroll-mt-24">🌐 Internet Speed (Mbps)</h3>
-                  <p className="text-muted-foreground">A summary of internet speed. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="remote-readiness" className="text-xl font-semibold mb-2 scroll-mt-24">🖥️ Remote Work Readiness</h3>
-                  <p className="text-muted-foreground">A summary of remote work readiness. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="commute" className="text-xl font-semibold mb-2 scroll-mt-24">🚗 Commute Time</h3>
-                  <p className="text-muted-foreground">A summary of commute time. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="job-market" className="text-xl font-semibold mb-2 scroll-mt-24">📈 Job Market Resilience</h3>
-                  <p className="text-muted-foreground">A summary of job market resilience. (Placeholder text.)</p>
-                </div>
-              </div>
+            <section id="work-flexibility" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">💻 Work & Flexibility</h2>
+              <p className="text-muted-foreground mb-2">
+                Learn about the work culture, job opportunities, and flexibility for remote or hybrid work in this city.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>Major industries and employers</li>
+                <li>Remote work infrastructure</li>
+                <li>Work-life balance</li>
+              </ul>
             </section>
-
-            <section id="health-longevity" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">🌱 Health & Longevity</h2>
-              <p className="text-muted-foreground mb-6">Health & Longevity summarizes the factors that contribute to a long, healthy life in this city. You'll learn about air and water quality, healthcare access, life expectancy, and mental wellbeing. This section will be regularly updated with the latest health data and resources to help you make informed decisions about your wellbeing.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="air-quality" className="text-xl font-semibold mb-2 scroll-mt-24">🌬️ Air Quality</h3>
-                  <p className="text-muted-foreground">A summary of air quality. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="water-quality" className="text-xl font-semibold mb-2 scroll-mt-24">🚿 Water Quality</h3>
-                  <p className="text-muted-foreground">A summary of water quality. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="healthcare" className="text-xl font-semibold mb-2 scroll-mt-24">🏥 Healthcare Access</h3>
-                  <p className="text-muted-foreground">A summary of healthcare access. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="life-expectancy" className="text-xl font-semibold mb-2 scroll-mt-24">⏳ Life Expectancy</h3>
-                  <p className="text-muted-foreground">A summary of life expectancy. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="mental-health" className="text-xl font-semibold mb-2 scroll-mt-24">😊 Mental Health & Wellbeing</h3>
-                  <p className="text-muted-foreground">A summary of mental health and wellbeing. (Placeholder text.)</p>
-                </div>
-              </div>
+            <section id="health-longevity" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">🌱 Health & Longevity</h2>
+              <p className="text-muted-foreground mb-2">
+                Find out about healthcare, wellness, and longevity in this city. We cover hospitals, fitness, and healthy living options.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>Access to healthcare and hospitals</li>
+                <li>Fitness centers and outdoor activities</li>
+                <li>General health and wellness</li>
+              </ul>
             </section>
-
-            <section id="pace-vibe-freedom" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">✨ Pace, Vibe, and Freedom</h2>
-              <p className="text-muted-foreground mb-6">Pace, Vibe, and Freedom describes the unique atmosphere of the city, including its pace of life, political climate, and sense of personal freedom. Whether you're seeking a relaxed environment or a vibrant, fast-paced lifestyle, this section will help you understand the city's overall vibe and what makes it special. Insights will be drawn from both data and local perspectives.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="pace-of-life" className="text-xl font-semibold mb-2 scroll-mt-24">🐢 Pace of Life</h3>
-                  <p className="text-muted-foreground">A summary of pace of life. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="freedom" className="text-xl font-semibold mb-2 scroll-mt-24">🗳️ Political Climate / Personal Freedom</h3>
-                  <p className="text-muted-foreground">A summary of political climate and personal freedom. (Placeholder text.)</p>
-                </div>
-              </div>
+            <section id="pace-vibe-freedom" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">✨ Pace, Vibe, and Freedom</h2>
+              <p className="text-muted-foreground mb-2">
+                Get a feel for the pace of life, the city's vibe, and the sense of personal freedom you can expect here.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>City atmosphere and culture</li>
+                <li>Opportunities for self-expression</li>
+                <li>Balance between work and leisure</li>
+              </ul>
             </section>
-
-            <section id="mobility-access" className="mt-16 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-4">🚀 Mobility & Access</h2>
-              <p className="text-muted-foreground mb-6">Mobility & Access evaluates how easy it is to get around the city and connect to the wider region. This overview will cover airport access, public transportation, regional transit, and options for commuting by car, bike, or public transit. You'll also find information on EV charging and how well the city is connected to major metro areas, making it easier to plan your daily life and travels.</p>
-              <div className="space-y-8">
-                <div>
-                  <h3 id="airport-access" className="text-xl font-semibold mb-2 scroll-mt-24">✈️ Airport Access</h3>
-                  <p className="text-muted-foreground">A summary of airport access. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="regional-transit" className="text-xl font-semibold mb-2 scroll-mt-24">🚆 Regional Transit Connectivity</h3>
-                  <p className="text-muted-foreground">A summary of regional transit connectivity. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="public-transportation" className="text-xl font-semibold mb-2 scroll-mt-24">🚌 Public Transportation Score</h3>
-                  <p className="text-muted-foreground">A summary of public transportation score. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="commute-versatility" className="text-xl font-semibold mb-2 scroll-mt-24">🚴 Commute Versatility</h3>
-                  <p className="text-muted-foreground">A summary of commute versatility. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="metro-commute" className="text-xl font-semibold mb-2 scroll-mt-24">🗺️ Commute to Major Metro</h3>
-                  <p className="text-muted-foreground">A summary of commute to major metro. (Placeholder text.)</p>
-                </div>
-                <div>
-                  <h3 id="ev-charging" className="text-xl font-semibold mb-2 scroll-mt-24">⚡ EV Charging Access</h3>
-                  <p className="text-muted-foreground">A summary of EV charging access. (Placeholder text.)</p>
-                </div>
-              </div>
+            <section id="mobility-access" className="mb-8 scroll-mt-24">
+              <h2 className="text-2xl font-semibold mb-2">🚀 Mobility & Access</h2>
+              <p className="text-muted-foreground mb-2">
+                Understand how easy it is to get around and travel to and from this city, both locally and internationally.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground">
+                <li>Public transit and walkability</li>
+                <li>Airport and travel connections</li>
+                <li>Accessibility for all residents</li>
+              </ul>
             </section>
+            {/* END SUB-SCORE SECTIONS */}
             <p className="text-muted-foreground mb-6">
               Region: {city.region} <br />
-              Country: {city.country} <br />
-              Population: {city.population?.toLocaleString() ?? "Unknown"}
+        Country: {city.country} <br />
+              Population: {city.population ? city.population.toLocaleString() : "Unknown"}
             </p>
-            {/* Add more city details here as needed */}
           </div>
           <div className="hidden text-sm lg:block">
             <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
@@ -321,44 +215,28 @@ export default async function CityPage({ params }: { params: { slug: string } })
                 <div className="font-medium">On this page</div>
                 <ul className="m-0 list-none">
                   <li className="mt-0 pt-2">
-                    <a href="#introduction" className="text-muted-foreground hover:text-foreground">
-                      Introduction
-                    </a>
+                    <a href="#introduction" className="text-muted-foreground hover:text-foreground">Introduction</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#lq-score" className="text-muted-foreground hover:text-foreground">
-                      LQ Score
-                    </a>
+                    <a href="#lq-score" className="text-muted-foreground hover:text-foreground">LQ Score</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#affordability-accessibility" className="text-muted-foreground hover:text-foreground">
-                      Affordability & Accessibility
-                    </a>
+                    <a href="#affordability-accessibility" className="text-muted-foreground hover:text-foreground">Affordability & Accessibility</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#family-community" className="text-muted-foreground hover:text-foreground">
-                      Family & Community
-                    </a>
+                    <a href="#family-community" className="text-muted-foreground hover:text-foreground">Family & Community</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#work-flexibility" className="text-muted-foreground hover:text-foreground">
-                      Work & Flexibility
-                    </a>
+                    <a href="#work-flexibility" className="text-muted-foreground hover:text-foreground">Work & Flexibility</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#health-longevity" className="text-muted-foreground hover:text-foreground">
-                      Health & Longevity
-                    </a>
+                    <a href="#health-longevity" className="text-muted-foreground hover:text-foreground">Health & Longevity</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#pace-vibe-freedom" className="text-muted-foreground hover:text-foreground">
-                      Pace, Vibe, and Freedom
-                    </a>
+                    <a href="#pace-vibe-freedom" className="text-muted-foreground hover:text-foreground">Pace, Vibe, and Freedom</a>
                   </li>
                   <li className="mt-0 pt-2">
-                    <a href="#mobility-access" className="text-muted-foreground hover:text-foreground">
-                      Mobility & Access
-                    </a>
+                    <a href="#mobility-access" className="text-muted-foreground hover:text-foreground">Mobility & Access</a>
                   </li>
                 </ul>
               </div>

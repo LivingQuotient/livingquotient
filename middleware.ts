@@ -1,3 +1,6 @@
+/*
+// EXISTING next-auth middleware
+
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
@@ -43,4 +46,33 @@ export default withAuth(
 
 export const config = {
   matcher: ["/dashboard/:path*", "/editor/:path*", "/login", "/register"],
+}
+
+*/
+
+// TEMPORARY password gate for production preview
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+
+const username = "charlesjohnson"
+const password = "Oliveiscute1995!"
+const authHeader = `Basic ${btoa(`${username}:${password}`)}`
+
+export function middleware(req: NextRequest) {
+  const auth = req.headers.get("authorization")
+
+  if (auth === authHeader) {
+    return NextResponse.next()
+  }
+
+  return new NextResponse("Authentication required", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate": 'Basic realm="Secure Preview"',
+    },
+  })
+}
+
+export const config = {
+  matcher: ["/((?!_next|favicon.ico).*)"],
 }
